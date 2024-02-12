@@ -65,7 +65,7 @@ class Reviews(db.Model,SerializerMixin):
     customer_name = db.Column(db.String)
     review = db.Column(db.String)
 
-    def serilaize(self):
+    def serialize(self):
         return {
             'id':self.id,
             'customer_name': self.customer_name,
