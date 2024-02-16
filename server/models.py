@@ -2,6 +2,7 @@
 from sqlalchemy.orm import validates
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
+import re
 
 db = SQLAlchemy()
 
@@ -46,8 +47,11 @@ class Contact(db.Model,SerializerMixin):
     # validate email 
     @validates('email')
     def validate_email(self, key, email):
-        if '@' not in email:
-            raise ValueError('Invalid email')
+        email_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+        
+        if not re.match(email_pattern, email):
+            raise ValueError('Invalid email format')
+        
         return email
     #serialize
     def serialize(self):

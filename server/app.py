@@ -85,6 +85,16 @@ class ReviewList(Resource):
         response = make_response(jsonify(new_review.serialize()), 200)
         return response
     
+    def patch(self, id):
+        data = request.get_json()
+        review = Reviews.query.get(id)
+        if review:
+            review.review = data['review']
+            db.session.commit()
+            return {"message": "Review updated successfully"}, 200
+        else:
+            return {"error": "Review not found"}, 404   
+    
 api.add_resource(ReviewList, '/reviews')
 
 class ContactList(Resource):

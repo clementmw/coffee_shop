@@ -33,7 +33,7 @@ with app.app_context():
     # print("Coffee data seeded successfully.")
 # seed data for reviews
     reviews = [
-           {"customer_name": "John Doe", "review": "I love this coffee!"},
+           {"customer_name": "John Doe", "review": "I love this coffee Best coffiee shop in this town will definately recommend people here!"},
            {"customer_name": "Jane Smith", "review": "Best coffiee shop in this town will definately recommend people here"},
            {"customer_name": "Bob Johnson", "review": "I've never had a better cup of coffee, and the ambience of this place is perfect"},
        ]

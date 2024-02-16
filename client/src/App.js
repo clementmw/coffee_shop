@@ -18,11 +18,9 @@ function App() {
   return (
     <div className="App">
       <nav className='bg-yellow-950'>
-        <li>
           <Link to="/" onClick={() => scrollToSection('home')}>
             Home
           </Link>
-        </li>
         <Link to="/about_us" onClick={() => scrollToSection('about')}>
           About Us
         </Link>
