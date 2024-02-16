@@ -6,6 +6,7 @@ function Contact() {
     const [full_name, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
+    const [submit, setSubmit] = useState(null)
     
     useEffect(()=>{
         //fetch contact
@@ -25,10 +26,10 @@ function Contact() {
 
         axios.post('/contact', {full_name,email,message})
         .then(res => {
-           console.log('contact added', res.data)
+           setSubmit('success')
         })
         .catch(error => {
-            console.log(error)
+            setSubmit('error')
         })
         // reset the form fields
         setFullName('');   
@@ -39,6 +40,13 @@ function Contact() {
   return (
     <div>
         <form onSubmit={handleSubmit}>
+        {submit === 'success' && (
+              <div className='text-green-600 mb-4'>Thanks, your message has been received.</div>
+            )}
+
+            {submit === 'error' && (
+              <div className='text-red-600 mb-4'>Please confirm your message.</div>
+            )}
             <div>
                 <label>Full Name
                     <input

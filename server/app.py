@@ -51,19 +51,16 @@ class PurchaseList(Resource):
 
     def post(self):
         data = request.get_json()
+        customer_name = data['customer_name']
         coffee_id = data['coffee_id']
-        quantity_purchased = data['quantity_purchased']
-        # check if coffee exists
-        existing_coffee = Coffee.query.get(coffee_id)
-        if not existing_coffee:
-            return {"error": "Coffee not found"}, 404
-        else:
-            new_purchase = Purchase(coffee_id=coffee_id, quantity_purchased=quantity_purchased)
-            db.session.add(new_purchase)
-            db.session.commit()
+        quantity = data['quantity']
+        total_price = data['total_price']
+        new_purchase = Purchase(coffee_id=coffee_id, quantity=quantity, total_price=total_price, customer_name=customer_name)
+        db.session.add(new_purchase)
+        db.session.commit()
 
-            response = make_response(jsonify(new_purchase.serialize()), 200)
-            return response
+        response = make_response(jsonify(new_purchase.serialize()), 200)
+        return response
         
 api.add_resource(PurchaseList, '/purchase')
 

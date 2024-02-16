@@ -26,15 +26,19 @@ class Coffee(db.Model,SerializerMixin):
 class Purchase(db.Model,SerializerMixin):
     __tablename__ = 'purchases'
     id = db.Column(db.Integer, primary_key = True)
+    customer_name = db.Column(db.String)
     # relationship to coffee
     coffee_id = db.Column(db.Integer(), db.ForeignKey('coffees.id'))
-    quantity_purchased = db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
+    total_price = db.Column(db.Integer)
 
     def serialize(self):
         return {
             'id':self.id,
             'coffee_id': self.coffee_id,
-            'quantity_purchased': self.quantity_purchased
+            'customer_name': self.customer_name,
+            'quantity': self.quantity,
+            'total_price':self.total_price
         }
 
 class Contact(db.Model,SerializerMixin):

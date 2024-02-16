@@ -8,8 +8,8 @@ function Navbar() {
     <div>
       <nav >
         <div>
-          <Link to="/">
-            <img src="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" alt="logo" />
+          <Link to="/"> 
+            {/* <img src="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" alt="logo" /> */}
           </Link>
           <div >
             <ul>
@@ -23,7 +23,7 @@ function Navbar() {
                 <Link to="/review">Reviews</Link>
               </li>
               <li>
-                <Link to="/purchase">Purchase</Link>
+                <Link to="/purchase">Order-Here</Link>
               </li>
               <li >
                 <Link to="/contact">Contact us</Link>
