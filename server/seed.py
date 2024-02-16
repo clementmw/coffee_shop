@@ -1,6 +1,6 @@
 # seeddata
 from faker import Faker
-from models import db, Coffee, Purchase, Reviews, Contact
+from models import db, Coffee, Purchase, Reviews
 from app import app
 from random import choice as rc
 
