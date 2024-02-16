@@ -1,137 +1,211 @@
-import React, { useEffect, useState} from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function Purchase() {
-    const [data, setData] = useState([])
-    const [coffee_id, setCoffee] = useState([])
-    // const [description, setDescription] = useState([])
-    const [customer_name, setCustomerName] = useState([])
-    const [OriginalPrice, setOriginalPrice] = useState(0)
-    const [total_price, setTotalPrice] = useState(0)
-    const [quantity, setQuantity] = useState(1)
-    const [submit, setSubmit] = useState(null);
+  const [data, setData] = useState([]);
+  const [coffee_id, setCoffee] = useState('');
+  const [description, setDescription] = useState('');
+  const [customer_name, setCustomerName] = useState('');
+  const [OriginalPrice, setOriginalPrice] = useState(0);
+  const [total_price, setTotalPrice] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [submit, setSubmit] = useState(null);
+  const [purchasedGood, setPurchasedGood] = useState([]);
+  const [currentOrder, setCurrentOrder] = useState(null);
 
-    useEffect(()=>{
-        axios.get('/coffee')
-        .then(res =>{
-            setData(res.data)
-             console.log(res.data)
-        })
+  useEffect(() => {
+    axios
+      .get('/coffee')
+      .then((res) => {
+        setData(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('error');
+      });
 
-    },[])
+    axios
+      .get('/purchase')
+      .then((res) => {
+        setPurchasedGood(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('error');
+      });
+  }, []);
 
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        // axios.post('/coffee',{coffee_name,description,price})
-        // .then(res =>{
-        //     console.log(res.data)
-        // })
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  const increaseQuality = () => {
+    setQuantity((prevquantity) => prevquantity + 1);
+  };
+
+  const reduceQuality = () => {
+    if (quantity > 1) {
+      setQuantity((prevquantity) => prevquantity - 1);
+    } else if (quantity === 1) {
+      alert('Quantity cannot be less than  1');
     }
-    const increaseQuality = () => {
-        setQuantity(prevquantity => prevquantity + 1);
-    };
-    const reduceQuality = () => {
-        if(quantity > 1){
-        setQuantity(prevquantity => prevquantity - 1);
-        }
-        else if(quantity === 1){
-            alert("Quantity cannot be less than  1")
-        }
-    };
-    useEffect(()=>{
-        setTotalPrice(OriginalPrice * quantity);
+  };
 
-    },[quantity,OriginalPrice])
+  useEffect(() => {
+    setTotalPrice(OriginalPrice * quantity);
+    setCurrentOrder({
+      coffee_id,
+      customer_name,
+      quantity,
+      total_price,
+    });
+  }, [quantity, OriginalPrice, coffee_id, customer_name, total_price]);
 
-    const handleOrder = (e)=>{
-        const selectedCoffee = data.find(coffee => coffee.coffee_name === coffee_id);
-        if (selectedCoffee){
-        axios.post('/purchase',{coffee_id:selectedCoffee.id,customer_name,quantity,total_price})
-        .then(res =>{
-            console.log(res.data)
-            setSubmit('success')
+  const handleOrder = () => {
+    const selectedCoffee = data.find((coffee) => coffee.coffee_name === coffee_id);
+    if (selectedCoffee) {
+      axios
+        .post('/purchase', {
+          coffee_id: selectedCoffee.id,
+          customer_name,
+          quantity,
+          total_price,
         })
-        .catch(err =>{
-            console.log(err)
-            setSubmit('error')
-            alert ("error")
+        .then((res) => {
+          console.log(res.data);
+          setSubmit('success');
         })
-
-        }
-        
+        .catch((err) => {
+          console.log(err);
+          setSubmit('error');
+          alert('error');
+        });
     }
-  return (
-    <div>
-      <div>Order-Here</div>
-      <form onSubmit={handleSubmit}>
-            {submit === 'success' && (
-              <div className='text-green-600 mb-4'>Purchase made successfully.</div>
-            )}
 
-            {submit === 'error' && (
-              <div className='text-red-600 mb-4'>Please confirm your order.</div>
-            )}
-        <label>
-          Customer Name
-          <input
-            type="text"
-            value={customer_name}
-            onChange={(e) => setCustomerName(e.target.value)}
-            required
-          />
-        </label>
-        
-        <label>
-          Coffee Choice
+    // clear
+     };
+
+     return (
+      <div className='bg-customColor text-white h-screen flex flex-col items-center justify-center'>
+  <h2 className='text-3xl font-bold mb-4 text-blue-500'>Order Here</h2>
+
+  <div className='container mx-auto flex items-center justify-center'>
+    <div className='w-full sm:w-1/2 p-4 sm:p-8 mb-4 sm:mb-0'>
+      <form onSubmit={handleSubmit} className='bg-gray-200 shadow-md rounded px-8 pt-4 w-96'>
+        {submit === 'success' && (
+          <div className='text-green-600 mb-4'>Purchase made successfully.</div>
+        )}
+
+        {submit === 'error' && (
+          <div className='text-red-600 mb-4'>Please confirm your order.</div>
+        )}
+
+        <div className='mb-4'>
+          <label className='block text-gray-700'>
+            Customer Name
+            <input
+              type='text'
+              value={customer_name}
+              onChange={(e) => setCustomerName(e.target.value)}
+              required
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            />
+          </label>
+        </div>
+
+        <div className='mb-4'>
+          <label className='block text-gray-700'>
+            Coffee Choice
             <select
-                value={coffee_id}
-                onChange={(e) => {
-                    setCoffee(e.target.value);
-                    // Fetch the price of the selected coffee
-                    const selectedCoffee = data.find(coffee => coffee.coffee_name === e.target.value);
-                    if (selectedCoffee) {
-                      setOriginalPrice(selectedCoffee.price);
-                      setTotalPrice(selectedCoffee.price * quantity);
-                    }
-                  }}
-                  required    
+              value={coffee_id}
+              onChange={(e) => {
+                setCoffee(e.target.value);
+                const selectedCoffee = data.find((coffee) => coffee.coffee_name === e.target.value);
+                if (selectedCoffee) {
+                  setDescription(selectedCoffee.description);
+                  setOriginalPrice(selectedCoffee.price);
+                  setTotalPrice(selectedCoffee.price * quantity);
+                }
+              }}
+              required
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             >
-                <option value="">Select Coffee</option>
-                {data.map((coffee) => (
+              <option value=''>Select Coffee</option>
+              {data.map((coffee) => (
                 <option key={coffee.id} value={coffee.coffee_name}>
-                    {coffee.coffee_name}
+                  {coffee.coffee_name}
                 </option>
-                ))}
+              ))}
             </select>
-        </label>
-        <label>
-          Price: Ksh{OriginalPrice}
-        </label>
+          </label>
+        </div>
 
-        <label>
+        <div className='mb-4'>
+          <label className='block text-gray-700'>Ingredients: {description}</label>
+        </div>
+
+        <div className='mb-4'>
+          <label className='block text-gray-700'>Price: Ksh {OriginalPrice}</label>
+        </div>
+
+        <div className='mb-4'>
+          <label className='block text-gray-700'>
             Quantity
-           <button onClick={reduceQuality}>-</button>
-               <input 
-               type="text" 
-               pattern='\d*'
-               inputMode='numeric'
-               value={quantity} 
-               onChange={(e) => setQuantity(e.target.value)}
-               />
-           <button onClick={increaseQuality}>+</button>
-        </label>
+            <div className='flex items-center'>
+              <button onClick={reduceQuality} className='px-2 py-1 border rounded border-gray-300'>
+                -
+              </button>
+              <input
+                type='text'
+                pattern='\d*'
+                inputMode='numeric'
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                className='flex-1 ml-2 mr-2 border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              />
+              <button onClick={increaseQuality} className='px-2 py-1 border rounded border-gray-300'>
+                +
+              </button>
+            </div>
+          </label>
+        </div>
 
-        <label>
-          Total Price: Ksh {total_price}
-        </label>
-        <button onClick={handleOrder} className='bg-cyan-200'>
+        <div className='mb-4'>
+          <label className='block text-gray-700'>Total Price: Ksh {total_price}</label>
+        </div>
+
+        <div className='mb-4'>
+          <button
+            onClick={handleOrder}
+            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer'
+            disabled={!customer_name}
+          >
             Order
-        </button>
+          </button>
+        </div>
       </form>
-      <div>
-      </div>
     </div>
-  )
+
+    <div className='w-full sm:w-1/2 p-4 sm:p-8'>
+      {currentOrder && (
+        <div className='ml-4'>
+          <h1 className='text-xl font-bold mb-2'>Your Current Order</h1>
+          <p className='text-white'>
+            Customer name: {currentOrder.customer_name} <br />
+            Coffee: {currentOrder.coffee_id} <br />
+            Quantity: {currentOrder.quantity} <br />
+            Total Price: {currentOrder.total_price} <br />
+          </p>
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+
+     )
+      
 }
 
-export default Purchase
+export default Purchase;

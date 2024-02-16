@@ -45,11 +45,11 @@ with app.app_context():
     # print("Review data seeded successfully.")
         
 # seed data for purchases
-        new_purchase = Purchase(
-            coffee_id = rc(Coffee.query.all()).id,
-            quantity_purchased = fake.random_int(min=1, max=5)
-        )
-        db.session.add(new_purchase)
-        db.session.commit()
+        # new_purchase = Purchase(
+        #     coffee_id = rc(Coffee.query.all()).id,
+        #     quantity_purchased = fake.random_int(min=1, max=5)
+        # )
+        # db.session.add(new_purchase)
+        # db.session.commit()
 
 print( "🦸‍♀️ Done seeding!")
