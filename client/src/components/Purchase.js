@@ -88,120 +88,119 @@ function Purchase() {
      };
 
      return (
-      <div className='bg-customColor text-white h-screen flex flex-col items-center justify-center'>
-  <h2 className='text-3xl font-bold mb-4 text-blue-500'>Order Here</h2>
+      <div className='bg-white text-white h-screen flex flex-col items-center container'>
+        <div className=' flex items-center '>
+          <div className='w-full sm:w-1/2 p-4 sm:p-8 mb-4 sm:mb-0'>
+            <form onSubmit={handleSubmit} className='bg-gray-200 shadow-md rounded px-8 pt-2 w-96'>
+                {submit === 'success' && (
+                  <div className='text-green-600 mb-4'>Order made successfully,Please wait as we process your order.</div>
+                )}
 
-  <div className='container mx-auto flex items-center justify-center'>
-    <div className='w-full sm:w-1/2 p-4 sm:p-8 mb-4 sm:mb-0'>
-      <form onSubmit={handleSubmit} className='bg-gray-200 shadow-md rounded px-8 pt-4 w-96'>
-        {submit === 'success' && (
-          <div className='text-green-600 mb-4'>Purchase made successfully.</div>
-        )}
+                {submit === 'error' && (
+                  <div className='text-red-600 mb-4'>Please confirm your order.</div>
+                )}
+                <h2 className='text-3xl font-bold mb-4 text-blue-500'>Order Here</h2>
 
-        {submit === 'error' && (
-          <div className='text-red-600 mb-4'>Please confirm your order.</div>
-        )}
+              <div className='mb-4'>
+                <label className='block text-gray-700'>
+                  Customer Name
+                  <input
+                    type='text'
+                    value={customer_name}
+                    onChange={(e) => setCustomerName(e.target.value)}
+                    required
+                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                  />
+                </label>
+              </div>
 
-        <div className='mb-4'>
-          <label className='block text-gray-700'>
-            Customer Name
-            <input
-              type='text'
-              value={customer_name}
-              onChange={(e) => setCustomerName(e.target.value)}
-              required
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-            />
-          </label>
+              <div className='mb-4'>
+                <label className='block text-gray-700'>
+                  Coffee Choice
+                  <select
+                    value={coffee_id}
+                    onChange={(e) => {
+                      setCoffee(e.target.value);
+                      const selectedCoffee = data.find((coffee) => coffee.coffee_name === e.target.value);
+                      if (selectedCoffee) {
+                        setDescription(selectedCoffee.description);
+                        setOriginalPrice(selectedCoffee.price);
+                        setTotalPrice(selectedCoffee.price * quantity);
+                      }
+                    }}
+                    required
+                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                  >
+                    <option value=''>Select Coffee</option>
+                    {data.map((coffee) => (
+                      <option key={coffee.id} value={coffee.coffee_name}>
+                        {coffee.coffee_name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+
+              <div className='mb-4'>
+                <label className='block text-gray-700'>Ingredients: {description}</label>
+              </div>
+
+              <div className='mb-4'>
+                <label className='block text-gray-700'>Price: Ksh {OriginalPrice}</label>
+              </div>
+
+              <div className='mb-4'>
+                <label className='block text-gray-700'>
+                  Quantity
+                  <div className='flex items-center'>
+                    <button onClick={reduceQuality} className='px-2 py-1 border rounded border-gray-300'>
+                      -
+                    </button>
+                    <input
+                      type='text'
+                      pattern='\d*'
+                      inputMode='numeric'
+                      value={quantity}
+                      onChange={(e) => setQuantity(e.target.value)}
+                      className='flex-1 ml-2 mr-2 border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                    />
+                    <button onClick={increaseQuality} className='px-2 py-1 border rounded border-gray-300'>
+                      +
+                    </button>
+                  </div>
+                </label>
+              </div>
+
+              <div className='mb-4'>
+                <label className='block text-gray-700'>Total Price: Ksh {total_price}</label>
+              </div>
+
+              <div className='mb-4'>
+                <button
+                  onClick={handleOrder}
+                  className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer'
+                  disabled={!customer_name}
+                >
+                  Order
+                </button>
+              </div>
+            </form>
+          </div>
+      {/* 
+          <div className='w-full sm:w-1/2 p-4 sm:p-8'>
+            {currentOrder && (
+              <div className='ml-4'>
+                <h1 className='text-xl font-bold mb-2'>Your Current Order</h1>
+                <p className='text-white'>
+                  Customer name: {currentOrder.customer_name} <br />
+                  Coffee: {currentOrder.coffee_id} <br />
+                  Quantity: {currentOrder.quantity} <br />
+                  Total Price: {currentOrder.total_price} <br />
+                </p>
+              </div>
+            )}
+          </div> */}
         </div>
-
-        <div className='mb-4'>
-          <label className='block text-gray-700'>
-            Coffee Choice
-            <select
-              value={coffee_id}
-              onChange={(e) => {
-                setCoffee(e.target.value);
-                const selectedCoffee = data.find((coffee) => coffee.coffee_name === e.target.value);
-                if (selectedCoffee) {
-                  setDescription(selectedCoffee.description);
-                  setOriginalPrice(selectedCoffee.price);
-                  setTotalPrice(selectedCoffee.price * quantity);
-                }
-              }}
-              required
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-            >
-              <option value=''>Select Coffee</option>
-              {data.map((coffee) => (
-                <option key={coffee.id} value={coffee.coffee_name}>
-                  {coffee.coffee_name}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-
-        <div className='mb-4'>
-          <label className='block text-gray-700'>Ingredients: {description}</label>
-        </div>
-
-        <div className='mb-4'>
-          <label className='block text-gray-700'>Price: Ksh {OriginalPrice}</label>
-        </div>
-
-        <div className='mb-4'>
-          <label className='block text-gray-700'>
-            Quantity
-            <div className='flex items-center'>
-              <button onClick={reduceQuality} className='px-2 py-1 border rounded border-gray-300'>
-                -
-              </button>
-              <input
-                type='text'
-                pattern='\d*'
-                inputMode='numeric'
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
-                className='flex-1 ml-2 mr-2 border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              />
-              <button onClick={increaseQuality} className='px-2 py-1 border rounded border-gray-300'>
-                +
-              </button>
-            </div>
-          </label>
-        </div>
-
-        <div className='mb-4'>
-          <label className='block text-gray-700'>Total Price: Ksh {total_price}</label>
-        </div>
-
-        <div className='mb-4'>
-          <button
-            onClick={handleOrder}
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer'
-            disabled={!customer_name}
-          >
-            Order
-          </button>
-        </div>
-      </form>
-    </div>
-
-    <div className='w-full sm:w-1/2 p-4 sm:p-8'>
-      {currentOrder && (
-        <div className='ml-4'>
-          <h1 className='text-xl font-bold mb-2'>Your Current Order</h1>
-          <p className='text-white'>
-            Customer name: {currentOrder.customer_name} <br />
-            Coffee: {currentOrder.coffee_id} <br />
-            Quantity: {currentOrder.quantity} <br />
-            Total Price: {currentOrder.total_price} <br />
-          </p>
-        </div>
-      )}
-    </div>
-  </div>
 </div>
 
      )

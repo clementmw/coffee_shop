@@ -5,13 +5,20 @@ function Footer() {
   return (
     <div>
      <Contact/>
-     <div>
+     <div className='mt-8 py-4 bg-gray-900 text-white'>
       <p>
-        &copy; {new Date().getFullYear()} - All Rights Reserved
+        &copy; {new Date().getFullYear()}  Blackwood Coffee. All Rights Reserved
       </p>
+      <div className='container mx-auto text-center.'>
       <p>
-        <a>Developed by Clement Macharia </a>
+        <a href='/'>Developed by Clement Macharia </a>
       </p>
+      <div class="flex justify-center space-x-4 mt-4">
+          {/* <!-- Add social media icons/links here --> */}
+        </div>
+
+      </div>
+      
      </div>
     </div>
   )

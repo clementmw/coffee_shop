@@ -38,26 +38,9 @@ function Contact() {
       }
     
   return (
-    <div className="flex items-center justify-between p-4 bg-white">
-  {/* Additional content on the right */}
-  <div className="w-2/3 pr-4">
-    {/* Add your additional content here */}
-    <p>links to our pages</p>
-    <ul>
-    <li>
-      <a href="/">Home</a>
-    </li>
-    <li>
-    <a href="">About</a>
-    </li>
-    <li>
-    <a href="/purchase">OrderNow</a>
-    </li>
-    </ul>
-  </div>
-
-  {/* Contact form on the left */}
-  <div className="w-1/3">
+    <div className="flex items-center justify-center p-4 bg-white">
+      
+  <div>
     <div className="bg-white p-4 border rounded-md shadow-md">
       <form onSubmit={handleSubmit}>
         {submit === 'success' && (
@@ -115,7 +98,7 @@ function Contact() {
 
         <button
           type='submit'
-          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          className='bg-coffeeColor text-black px-4 py-2 rounded-md'
         >
           Submit
         </button>
