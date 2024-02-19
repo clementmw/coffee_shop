@@ -35,7 +35,7 @@ with app.app_context():
     reviews =[
   {"customer_name": "Wanjiku Maina", "review": "I love the variety of coffee options at Blackwood Coffee. The menu caters to all tastes, and each drink is crafted with precision."},
   {"customer_name": "Kimani Gitonga", "review": "As a regular customer, I can vouch for the consistency of Blackwood Coffee. Every cup feels like a treat."},
-  {"customer_name": "Njeri Kariuki", "review": "The ambiance is calming, and the coffee is exceptional. Blackwood Coffee has become my favorite spot for a peaceful coffee break."},
+  {"customer_name": "Mwamba Juliet", "review": "The ambiance is calming, and the coffee is exceptional. Blackwood Coffee has become my favorite spot for a peaceful coffee break."},
   {"customer_name": "Ochieng Omondi", "review": "The staff here is attentive and knowledgeable. They're always ready to recommend something new, and I've never been disappointed."},
   {"customer_name": "Achieng Ouma", "review": "Blackwood Coffee provides a welcoming environment for remote work. I appreciate the free Wi-Fi and the quality coffee that keeps me fueled throughout the day."},
   {"customer_name": "Mwangi Muthoni", "review": "I hosted a small event at Blackwood Coffee, and the team was incredibly accommodating. The cozy setting added a wonderful touch to the gathering."},
