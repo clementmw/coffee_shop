@@ -10,7 +10,7 @@ function Purchase() {
   const [total_price, setTotalPrice] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [submit, setSubmit] = useState(null);
-  const [purchasedGood, setPurchasedGood] = useState([]);
+  // const [purchasedGood, setPurchasedGood] = useState([]);
   const [currentOrder, setCurrentOrder] = useState(null);
 
   useEffect(() => {
@@ -25,16 +25,16 @@ function Purchase() {
         alert('error');
       });
 
-    axios
-      .get('/purchase')
-      .then((res) => {
-        setPurchasedGood(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert('error');
-      });
+    // axios
+    //   .get('/purchase')
+    //   .then((res) => {
+    //     setPurchasedGood(res.data);
+    //     console.log(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     alert('error');
+    //   });
   }, []);
 
   const handleSubmit = (e) => {
@@ -99,7 +99,7 @@ function Purchase() {
                 {submit === 'error' && (
                   <div className='text-red-600 mb-4'>Please confirm your order.</div>
                 )}
-                <h2 className='text-3xl font-bold mb-4 text-blue-500'>Order Here</h2>
+                <h2 className='text-3xl font-bold mb-4 text-coffeeColor'>Order Here</h2>
 
               <div className='mb-4'>
                 <label className='block text-gray-700'>

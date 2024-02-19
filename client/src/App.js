@@ -5,6 +5,7 @@ import Footer from './pages/Footer';
 import Purchase from './components/Purchase';
 import Navbar from './components/Navbar';
 import About from './components/About';
+import Review from './components/Review';
 
 
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/contact" element={<Footer/>}/>
         <Route path="/purchase" element={<Purchase/>}/>
         <Route path = "/about" element={<About/>}/>
+        <Route path = "/review" element={<Review/>}/>
       </Routes>
  
     </div>

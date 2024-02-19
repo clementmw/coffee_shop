@@ -1,7 +1,15 @@
 import React from 'react';
 import backgroundImage from '../images/coffee.jpg';
+import { useNavigate } from 'react-router-dom';
+// import Review from '../components/Review';
+
+
 
 function Home() {
+  const navigate = useNavigate();
+  const handleNavigate = ()=>{
+    navigate('/purchase')
+  }
   return (
     <div className='relative w-full h-screen flex flex-col items-center justify-center'>
       <div className="absolute top-0 left-0 w-full h-full z-0">
@@ -17,8 +25,9 @@ function Home() {
             <span>Whether you're a coffee lover or just looking for a quick and easy way to enjoy a cup of coffee, we've got you covered.</span>
           </p>
         </div>
-        <div>
-          <button className='bg-coffeeColor text-white px-4 py-2 rounded-md hover:bg-gray-700'>Order Now</button>
+        {/* <Review/> */}
+        <div className='mt-4'>
+          <button onClick={handleNavigate} className='bg-coffeeColor text-white px-4 py-2 rounded-md hover:bg-gray-700'>Order Now</button>
         </div>
       </div>
     </div>
