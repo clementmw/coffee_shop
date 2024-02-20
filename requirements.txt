@@ -1,13 +1,11 @@
 -i https://pypi.org/simple
 alembic==1.13.1; python_version >= '3.8'
 aniso8601==9.0.1
-bcrypt==4.1.2; python_version >= '3.7'
 blinker==1.7.0; python_version >= '3.8'
 click==8.1.7; python_version >= '3.7'
 exceptiongroup==1.2.0; python_version < '3.11'
 faker==23.2.1; python_version >= '3.8'
 flask==3.0.2; python_version >= '3.8'
-flask-bcrypt==1.0.1
 flask-cors==4.0.0
 flask-migrate==4.0.5; python_version >= '3.6'
 flask-restful==0.3.10
