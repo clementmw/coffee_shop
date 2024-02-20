@@ -61,7 +61,6 @@ function Purchase() {
       quantity,
       total_price,
     });
-    
   }, [quantity, OriginalPrice, coffee_id, customer_name, total_price]);
 
   const handleOrder = () => {
@@ -91,8 +90,8 @@ function Purchase() {
      return (
       <div className='bg-white text-white h-screen flex flex-col items-center container'>
         <div className=' flex items-center '>
-          <div className='w-full sm:w-1/2 p-4 sm:p-8 mb-4 sm:mb-0'>
-            <form onSubmit={handleSubmit} className='bg-gray-200 shadow-md rounded px-8 pt-2 w-96'>
+          <div>
+            <form onSubmit={handleSubmit} className='bg-gray-200 shadow-md rounded px-8 pt-2 w-96 justify-end'>
                 {submit === 'success' && (
                   <div className='text-green-600 mb-4'>Order made successfully,Please wait as we process your order.</div>
                 )}
@@ -191,13 +190,29 @@ function Purchase() {
           <div className='w-full sm:w-1/2 p-4 sm:p-8'>
             {currentOrder && (
               <div className='ml-4'>
-                <h1 className='text-xl font-bold mb-2'>Your Current Order</h1>
-                <p className='text-white'>
-                  Customer name: {currentOrder.customer_name} <br />
-                  Coffee: {currentOrder.coffee_id} <br />
-                  Quantity: {currentOrder.quantity} <br />
-                  Total Price: {currentOrder.total_price} <br />
-                </p>
+                <h1 className='bg-coffeeColor text-white p-2 text-center text-2xl font-bold'>
+                  Confirm Order</h1>
+                  <table className='table-auto'>
+                    <tbody>
+                      <tr className='bg-gray-100'>
+                        <td className='text-gray-800 '>Customer name:</td>
+                        <td className='text-gray-800'>{currentOrder.customer_name}</td>
+                      </tr>
+                      <tr className='bg-gray-200'>
+                        <td className='text-gray-800 '>Coffee:</td>
+                        <td className='text-gray-800'>{currentOrder.coffee_id}</td>
+                      </tr>
+                      <tr className='bg-gray-100'>
+                        <td className='text-gray-800 '>Quantity:</td>
+                        <td className='text-gray-800'>{currentOrder.quantity}</td>
+                      </tr>
+                      <tr className='bg-gray-200'>
+                        <td className='text-gray-800 '>Total Price:</td>
+                        <td className='text-gray-800'>{currentOrder.total_price}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
               </div>
             )}
           </div>
