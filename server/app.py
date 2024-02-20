@@ -1,14 +1,27 @@
 # app
-from flask import Flask,make_response,jsonify
+import os
+
+from flask import Flask,make_response,jsonify,render_template
 from flask_migrate import Migrate
 from models import db,Purchase,Contact,Reviews,Coffee
 from flask_restful import Api,Resource
 from flask_cors import CORS
 from flask import request
+from werkzeug.exceptions import NotFound
 
-app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///coffee.db'
+from dotenv import load_dotenv
+load_dotenv()
+
+app = Flask(
+    __name__,
+    static_url_path='',
+    static_folder='../client/build',
+    template_folder='../client/build'
+    )
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///coffee.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI') #render database url
 app.config['SQLITE_TRACK_MODIFICATION'] = False
 app.json.compact = False
 
@@ -17,6 +30,10 @@ migrate = Migrate(app,db)
 db.init_app(app)
 api = Api(app)
 CORS(app) #to link frontend
+
+@app.errorhandler(NotFound)
+def handle_not_found(e):
+    return render_template('index.html', title='Homepage', message='Welcome to our website!')
 
 class CoffeeList(Resource):
     def get(self):

@@ -39,7 +39,7 @@ function Contact() {
     
   return (
     <div className="flex items-center justify-center p-4 bg-white">
-      
+ 
   <div>
     <div className="bg-white p-4 border rounded-md shadow-md">
       <form onSubmit={handleSubmit}>
@@ -50,7 +50,7 @@ function Contact() {
         {submit === 'error' && (
           <div className='text-red-600 mb-4'>Please confirm your message.</div>
         )}
-
+         <h1 className='text-3xl font-bold mb-4 text-coffeeColor'>CONTACT US</h1>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="full_name">
             Full Name

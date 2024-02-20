@@ -12,8 +12,21 @@ faker = "*"
 sqlalchemy-serializer = "*"
 flask-restful = "*"
 flask-cors = "*"
+flask-bcrypt="*"
+gunicorn = "*"
+psycopg2 = "*"
+python-dotenv = "*"
+setuptools = "*"
+honcho = "*"
+importlib-metadata = "*"
+importlib-resources = "*"
+mako = "*"
+alembic = "*"
+pytz = "*"
+six = "*"
+werkzeug = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.10"
+python_version = "3.8.0"
