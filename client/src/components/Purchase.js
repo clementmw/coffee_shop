@@ -61,6 +61,7 @@ function Purchase() {
       quantity,
       total_price,
     });
+    
   }, [quantity, OriginalPrice, coffee_id, customer_name, total_price]);
 
   const handleOrder = () => {
@@ -186,7 +187,7 @@ function Purchase() {
               </div>
             </form>
           </div>
-      {/* 
+      
           <div className='w-full sm:w-1/2 p-4 sm:p-8'>
             {currentOrder && (
               <div className='ml-4'>
@@ -199,7 +200,7 @@ function Purchase() {
                 </p>
               </div>
             )}
-          </div> */}
+          </div>
         </div>
 </div>
 
