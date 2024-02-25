@@ -5,18 +5,12 @@ function Footer() {
   return (
     <div>
      <Contact/>
-     <div className='mt-8 py-4 bg-gray-900 text-white'>
+     <div className='py-2 text-white bg-customColor'>
       <p>
         &copy; {new Date().getFullYear()}  Blackwood Coffee. All Rights Reserved
       </p>
-      <div className='container mx-auto text-center.'>
-      <p>
+      <div className=''>
         <a href='/'>Developed by Clement Macharia </a>
-      </p>
-      <div class="flex justify-center space-x-4 mt-4">
-          {/* <!-- Add social media icons/links here --> */}
-        </div>
-
       </div>
       
      </div>

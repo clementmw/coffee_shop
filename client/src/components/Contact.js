@@ -1,26 +1,13 @@
 import axios from 'axios'
-import { useState, useEffect} from 'react'
+import { useState} from 'react'
 
 function Contact() {
-    const [contact, setContact] = useState('')
+    // const [contact, setContact] = useState('')
     const [full_name, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
     const [submit, setSubmit] = useState(null)
-    
-    useEffect(()=>{
-        //fetch contact
-        axios.get("/contact")
-        .then(res => {
-            setContact(res.data)
-        
-        })
-        .catch(error =>{
-            console.log("error",error)
-        })
-     
-    },[])
-    console.log(contact)
+
     const handleSubmit = async (e) =>{ 
         e.preventDefault();
 
@@ -38,8 +25,7 @@ function Contact() {
       }
     
   return (
-    <div className="flex items-center justify-center p-4 bg-white">
- 
+  <div className="flex items-center justify-center mt-3">
   <div>
     <div className="bg-white p-4 border rounded-md shadow-md">
       <form onSubmit={handleSubmit}>
@@ -95,13 +81,9 @@ function Contact() {
             required
           />
         </div>
-
-        <button
-          type='submit'
-          className='bg-coffeeColor text-black px-4 py-2 rounded-md'
-        >
-          Submit
-        </button>
+        <div>
+            <button className="bg-coffeeColor text-white px-4 py-2">Submit</button>
+          </div>
       </form>
     </div>
   </div>

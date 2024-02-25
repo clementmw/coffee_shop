@@ -88,10 +88,10 @@ function Purchase() {
      };
 
      return (
-      <div className='bg-white text-white h-screen flex flex-col items-center container'>
-        <div className=' flex items-center '>
+      <div className='bg-white text-white flex items-center justify-center mt-10'>
+        <div className=' flex flex-col md:flex-row '>
           <div>
-            <form onSubmit={handleSubmit} className='bg-gray-200 shadow-md rounded px-8 pt-2 w-96 justify-end'>
+            <form onSubmit={handleSubmit} className='bg-gray-200 shadow-md rounded px-8 pt-2 w-96'>
                 {submit === 'success' && (
                   <div className='text-green-600 mb-4'>Order made successfully,Please wait as we process your order.</div>
                 )}
@@ -99,7 +99,7 @@ function Purchase() {
                 {submit === 'error' && (
                   <div className='text-red-600 mb-4'>Please confirm your order.</div>
                 )}
-                <h2 className='text-3xl font-bold mb-4 text-coffeeColor'>Order Here</h2>
+                <h2 className='text-3xl font-bold mb-4 text-coffeeColor'>ORDER HERE</h2>
 
               <div className='mb-4'>
                 <label className='block text-gray-700'>
@@ -187,12 +187,16 @@ function Purchase() {
             </form>
           </div>
       
-          <div className='w-full sm:w-1/2 p-4 sm:p-8'>
+          <div className='md:w-1/2 p-8'>
             {currentOrder && (
-              <div className='ml-4'>
-                <h1 className='bg-coffeeColor text-white p-2 text-center text-2xl font-bold'>
-                  Confirm Order</h1>
+              <div>
+               
                   <table className='table-auto'>
+                    <thead>
+                      <tr>
+                        <th className='text-coffeeColor text-2xl'>CONFIRM ORDER</th>
+                      </tr>
+                    </thead>
                     <tbody>
                       <tr className='bg-gray-100'>
                         <td className='text-gray-800 '>Customer name:</td>

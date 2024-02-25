@@ -112,12 +112,7 @@ class ReviewList(Resource):
 api.add_resource(ReviewList, '/reviews')
 
 class ContactList(Resource):
-    def get(self):
-        get_contact = [contact.serialize() for contact in Contact.query.all()]
-        response = make_response(jsonify(get_contact), 200)
-        return response
-
-    def post(self):
+     def post(self):
         data = request.get_json()
         full_name = data['full_name']
         email = data['email']

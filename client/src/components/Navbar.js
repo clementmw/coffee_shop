@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logoimage from '../images/logo.jpeg'
+import { FiShoppingCart } from "react-icons/fi"
 
 function Navbar() {
   return (
@@ -23,9 +24,11 @@ function Navbar() {
           <Link to="/contact" className="hover:text-gray-300">
             Contact us
           </Link>
-          <Link to="/purchase" className="hover:text-gray-300">
-            Order-Here
+          <Link to="/purchase" className="flex items-center hover:text-gray-300">
+              Order
+              <FiShoppingCart className="ml-2" />
           </Link>
+
         </div>
       </nav>
     </div>
