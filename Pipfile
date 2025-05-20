@@ -28,5 +28,5 @@ werkzeug = "*"
 [dev-packages]
 
 [requires]
-python_version = "3.8.0"
+python_version = "3.12.3"
 pip_version = "24.0"
